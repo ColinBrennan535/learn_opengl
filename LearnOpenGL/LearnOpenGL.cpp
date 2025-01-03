@@ -4,23 +4,27 @@
 #include <vector>
 #include <memory>
 
-const char* vertexShaderSource =
+const char* vertexShaderSource = /*vertex shader:*/
 "#version 330 core\n"
 "layout (location = 0) in vec3 aPos;\n"
+"layout (location = 1) in vec3 aColor;\n"
+"out vec3 ourColor;\n"
 "void main()\n"
 "{\n"
-"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+"   gl_Position = vec4(aPos, 1.0);\n"
+"   ourColor = aColor;\n"
 "}\0";
 
-const char* fragmentShaderSource =
+const char* fragmentShaderSource = //fragment shader:
 "#version 330 core\n"
 "out vec4 FragColor;\n"
+"in vec3 ourColor;\n"
 "void main()\n"
 "{\n"
-"	FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+"	FragColor = vec4(ourColor, 1.0);\n"
 "}\0";
 
-const char* fragmentShaderYellowSource =
+const char* fragmentShaderYellowSource = //fragment shader:
 "#version 330 core\n"
 "out vec4 FragColor;\n"
 "void main()\n"
@@ -216,6 +220,13 @@ int main()
 		}
 	};
 
+	float verticesWithColor[] =
+	{   // Positions	     // Colors
+		 0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
+		-0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
+		 0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f
+	};
+
 	std::vector<SimpleMesh> meshes;
 	for (GLuint i = 0; i < 2; i++)
 	{
@@ -266,7 +277,7 @@ int main()
 	// GL_STREAM_DRAW: set once, use a few times.
 	// GL_STATIC_DRAW: set once, used many times.
 	// GL_DYNAMIC_DRAW: set many times, used many times.
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(verticesWithColor), verticesWithColor, GL_STATIC_DRAW);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	// link vertex attributes.
@@ -278,10 +289,21 @@ int main()
 		3,					// Size of attribute (3 for vec3).
 		GL_FLOAT,			// Attribute is float type. 
 		GL_FALSE,			// Do not normalize attribute.
-		3 * sizeof(float),  // Stride
+		6 * sizeof(float),  // Stride
 		(void*)0			// Pointer offset to start of data.
 	);
 	glEnableVertexAttribArray(0);
+
+	// load color attribute
+	glVertexAttribPointer(
+		1,
+		3,
+		GL_FLOAT,
+		GL_FALSE,
+		6 * sizeof(float),
+		(void*)(3 * sizeof(float))
+	);
+	glEnableVertexAttribArray(1);
 
 	// unbind
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -290,7 +312,13 @@ int main()
 	float* color;
 	while (!glfwWindowShouldClose(window))
 	{
+		// set timevarying shader color.
+		//float timeValue = glfwGetTime();
+		//float greenValue = (sin(timeValue) / 2.0f) + 0.5f;
+		//int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
+
 		glUseProgram(shaderProgram);
+		//glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
 
 		color = processInput(window);
 
@@ -299,9 +327,10 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, 
-			6, //sizeof(indices)/sizeof(unsigned int),
-			GL_UNSIGNED_INT, 0);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+		//glDrawElements(GL_TRIANGLES, 
+		//	6, //sizeof(indices)/sizeof(unsigned int),
+		//	GL_UNSIGNED_INT, 0);
 
 		for (const SimpleMesh & mesh : meshes)
 		{
