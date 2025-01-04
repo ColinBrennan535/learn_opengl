@@ -3,6 +3,7 @@
 #include <glfw3.h>
 #include <vector>
 #include <memory>
+#include <Shader.h>
 
 const char* vertexShaderSource = /*vertex shader:*/
 "#version 330 core\n"
@@ -83,7 +84,7 @@ float* processInput(GLFWwindow* window)
 	return res;
 }
 
-int main()
+int main_()
 {
 	// init glfw and configure
 	glfwInit();
