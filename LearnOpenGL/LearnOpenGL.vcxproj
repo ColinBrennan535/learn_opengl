@@ -138,7 +138,18 @@
   <ItemGroup>
     <ClInclude Include="include\glad\glad.h" />
     <ClInclude Include="include\KHR\khrplatform.h" />
-    <ClInclude Include="Shader.h" />
+    <ClInclude Include="include\Shader.h" />
+    <ClInclude Include="stb_image.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\calicoCritter.jpg" />
+    <Image Include="resources\calicoCritter.png" />
+    <Image Include="resources\container.jpg" />
+    <Image Include="resources\smileyFace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shdr\f_TEXTURE.glsl" />
+    <None Include="shdr\v_TEXTURE.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
