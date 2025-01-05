@@ -91,7 +91,7 @@ void processInput(GLFWwindow* window,
 		cameraPos -= cameraSpeed * cameraUp;
 }
 
-int main()
+int main_TEXTURE()
 {
 	// init glfw and configure
 	glfwInit();
@@ -139,7 +139,7 @@ int main()
 	// Following load routine would be a suitable constructor for a texture class.
 	// *****
 	int width, height, nrChannels;
-	unsigned char* data = stbi_load("resources\\googurt.jpg", &width, &height, &nrChannels, 0);
+	unsigned char* data = stbi_load("resources\\container.jpg", &width, &height, &nrChannels, 0);
 	
 	unsigned int textureWood;
 	glGenTextures(1, &textureWood);

@@ -132,13 +132,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="MinimalProgram.cpp" />
     <ClCompile Include="src\glad.c" />
-    <ClCompile Include="TextureProgram.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\glad\glad.h" />
     <ClInclude Include="include\KHR\khrplatform.h" />
     <ClInclude Include="include\Shader.h" />
+    <ClInclude Include="include\WindowState.h" />
     <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>
