@@ -60,5 +60,11 @@
     <None Include="shdr\v_TEXTURE.glsl">
       <Filter>Shader Files</Filter>
     </None>
+    <None Include="shdr\v_TRANSFORM.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="shdr\v_COORDINATE.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
