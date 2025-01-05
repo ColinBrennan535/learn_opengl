@@ -132,7 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="MinimalProgram.cpp" />
+    <ClCompile Include="LightingProgram.cpp" />
     <ClCompile Include="src\glad.c" />
   </ItemGroup>
   <ItemGroup>
@@ -147,11 +147,20 @@
     <Image Include="resources\calicoCritter.jpg" />
     <Image Include="resources\calicoCritter.png" />
     <Image Include="resources\container.jpg" />
+    <Image Include="resources\container2.png" />
+    <Image Include="resources\container2_specular.png" />
+    <Image Include="resources\googurt.jpg" />
+    <Image Include="resources\matrix.jpg" />
     <Image Include="resources\smileyFace.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="shdr\f_COLOR_LIT.glsl" />
+    <None Include="shdr\f_LIGHT_SOURCE.glsl" />
+    <None Include="shdr\f_MULTIPLE_LIGHTS.glsl" />
     <None Include="shdr\f_TEXTURE.glsl" />
+    <None Include="shdr\v_BASIC.glsl" />
     <None Include="shdr\v_COORDINATE.glsl" />
+    <None Include="shdr\v_LIGHT_SOURCE.glsl" />
     <None Include="shdr\v_TEXTURE.glsl" />
     <None Include="shdr\v_TRANSFORM.glsl" />
   </ItemGroup>
